@@ -4,17 +4,18 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const { ValidationError } = require('sequelize');
 
-const {environment} = require('./config')
-const isProduction = environment === 'production'
+const {environment} = require('./config');
+const isProduction = environment === 'production';
 
-const routes = require("./routes")
+const routes = require("./routes");
 
-const app = express()
+const app = express();
 
-app.use(morgan('dev'))
-app.use(cookieParser())
-app.use(express.json())
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(express.json());
 
 //Security middleware
 if(!isProduction){
@@ -22,14 +23,46 @@ if(!isProduction){
 }
 app.use(helmet({
     contentSecurityPolicy:false
-}))
+}));
 app.use(csurf({
     cookie:{
         secure:isProduction,
         sameSite:isProduction && "Lax",
         httpOnly:true
     }
-}))
+}));
 
 app.use(routes)
+
+//To catch any unhandled requests and push them to the error handler
+app.use((_req,_res, next) => {
+    const err = new Error("The requested resource couldn't be found")
+    err.title= "Resource Not Found";
+    err.errors = ["The requested resource couldn't be found"];
+    err.status = 404;
+    next(err)
+});
+
+//To handle sequelize errors
+app.use((err,_req,_res, next) => {
+    if(err instanceof ValidationError){
+        erro.errors = err.errors.map((e) => e.message);
+        err.title = 'Validation error'
+    }
+    next(err)
+});
+
+//Formatting Any Errors
+app.use((err,_req, res, _next) => {
+    res.status(err.status || 500);
+    console.log(err);
+    res.json({
+        title: err.title || 'Server Error',
+        message: err.message,
+        errors: err.errors,
+        stack: isProduction ? null : err.stack,
+    });
+});
+
+
 module.exports = app;
