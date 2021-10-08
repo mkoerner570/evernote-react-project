@@ -11,9 +11,9 @@ const { requireAuth } = require("../../utils/auth")
 router.use('/session',sessionRouter);
 router.use('/users', usersRouter);
 
-router.post('/test',(req,res) => {
-    res.json({requestBody:req.body});
-})
+// router.post('/test',(req,res) => {
+//     res.json({requestBody:req.body});
+// })
 
 // //GET /set-token-cookie test
 // router.get('/set-token-cookie', asyncHandler(async (req,res) => {

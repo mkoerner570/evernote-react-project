@@ -32,7 +32,6 @@ export const login = (user) => async(dispatch) => {
 }
 
 export const restoreUser = (user) => async(dispatch) => {
-    const {credential,password} = user;
     const response = await csrfFetch('/api/session');
     const data = await response.json();
     dispatch(setUser(data.user));
@@ -54,7 +53,7 @@ export const signup = (user) => async(dispatch) => {
     return response;
 }
 
-export const logoutUser = () => async(dispatch) => {
+export const logout = () => async(dispatch) => {
     const response = await csrfFetch('/api/session',{
         method: "DELETE"
     });
@@ -66,13 +65,17 @@ const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
     let newState;
-    switch(action.type){
-        case "LOAD_USER":
-            newState = Object.assign({},state);
-            newState.user = action.payload;
-            return newState;
-        default:
-            return state;
+    switch (action.type) {
+      case SET_USER:
+        newState = Object.assign({}, state);
+        newState.user = action.payload;
+        return newState;
+      case REMOVE_USER:
+        newState = Object.assign({}, state);
+        newState.user = null;
+        return newState;
+      default:
+        return state;
     }
 };
 
