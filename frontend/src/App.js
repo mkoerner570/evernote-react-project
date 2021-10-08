@@ -1,33 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import { ModalProvider } from "./context/Modal";
+
+import configureStore from "./store";
+import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
 
-function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+const store = configureStore();
 
+if (process.env.NODE_ENV !== "production") {
+  restoreCSRF();
+
+  window.csrfFetch = csrfFetch;
+  window.store = store;
+  window.sessionActions = sessionActions;
+}
+
+function Root() {
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
+    <Provider store={store}>
+      <ModalProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ModalProvider>
+    </Provider>
   );
 }
 
-export default App;
+ReactDOM.render(
+  <React.StrictMode>
+    <Root />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
