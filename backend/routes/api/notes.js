@@ -8,6 +8,15 @@ const db = require('../../db/models');
 
 const router = express.Router();
 
+router.get(
+	'/',
+	csrfProtection,
+	asyncHandler(async (req,res,next) => {
+		return res.json({
+			user,
+		})
+	})
+)
 
 router.post(
 	'/',
