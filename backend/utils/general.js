@@ -1,10 +1,10 @@
+const csrf = require("csurf")
 const csrfProtection = csrf({ cookie: true });
-const db = require('./db/models');
+const db = require('../db/models');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
-const { User, Note, Notebook } = require('./db/models');
+const { User, Note, Notebook } = require('../db/models');
 
-const csrfProtection = csrf({ cookie: true });
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
