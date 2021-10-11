@@ -4,7 +4,7 @@ const { check, validationResult } = require('express-validator');
 const { requireAuth } = require('../auth');
 
 const { csrfProtection, asyncHandler } = require('../utils');
-const db = require('../db/models');
+const db = require('../../db/models');
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.post(
 	csrfProtection,
 	errorValidators,
 	asyncHandler(async (req, res, next) => {
-		const {  } = req.body;
+		const { title, contents } = req.body;
 		const { userId } = req.session.auth;
 
 		const validatorErrors = validationResult(req);
@@ -25,17 +25,9 @@ router.post(
                 title,
                 contents
 			});
-			return res.redirect(``);
+			return res.json({
+				user,
+			});
         }
-		// } else {
-		// 	const api = await db.Api.findByPk(api_id);
-		// 	const errors = validatorErrors.array().map((error) => error.msg);
-		// 	res.render('reviews', {
-		// 		title: 'AceAPI Submit Review',
-		// 		csrfToken: req.csrfToken(),
-		// 		api,
-		// 		errors,
-		// 	});
-		// }
 	})
 );
