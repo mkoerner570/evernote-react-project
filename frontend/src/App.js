@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import NotesForm from "./components/NotesForm/NotesForm";
+import "./index.css"
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +24,15 @@ function App() {
           </Route>
         </Switch>
       )}
+    <div className="noteform">
+      {isLoaded && (
+        <Switch>
+          <Route path="/NotesForm">
+           <NotesForm />
+          </Route>
+        </Switch>
+      )}
+    </div>
     </>
   );
 }

@@ -11,7 +11,7 @@ const { requireAuth } = require("../../utils/auth")
 
 router.use('/session',sessionRouter);
 router.use('/users', usersRouter);
-router.use('/NotesForm',notesRouter);
+router.use('/notes',notesRouter);
 
 // router.post('/test',(req,res) => {
 //     res.json({requestBody:req.body});

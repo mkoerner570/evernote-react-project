@@ -1,1 +1,10 @@
 /* TODO Add site wide styles */
+
+.noteform{
+    display: flex;
+    flex-direction: column;
+    color: chartreuse;
+    padding: 10%;
+}
+
+#note{}
