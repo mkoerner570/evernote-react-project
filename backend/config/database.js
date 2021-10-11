@@ -1,4 +1,5 @@
 const config = require('./index');
+const { Model } = require('sequelize/types');
 
 const db = config.db;
 const username = db.username;

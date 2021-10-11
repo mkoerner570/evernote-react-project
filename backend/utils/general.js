@@ -4,25 +4,22 @@ const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
 const { User, Note, Notebook } = require('./db/models');
 
-const asyncHandler = (handler) => (req, res, next) =>
-	handler(req, res, next).catch(next);
-
 const csrfProtection = csrf({ cookie: true });
 
 const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
 
-const noteBuilder = async (id, title) => {
-        const toolbox = await db.Note.create({
-            user_id: id,
-            name: title,
+const noteBuilder = async (id, name) => {
+        const toolbox = await db.Notebook.create({
+            userId: id,
+            title: name,
         });
         return toolbox;
 };
 
 
 async function searchNotes(box) {
-	const results = await Notes.findAll({
+	const results = await Note.findAll({
 		where: {
 			description: {
 				[Op.iLike]: `%${box}%`,
@@ -33,4 +30,12 @@ async function searchNotes(box) {
 		},
 	});
 	return results;
+}
+
+
+module.exports = {
+    csrfProtection,
+    asyncHandler,
+    noteBuilder,
+    searchNotes
 }

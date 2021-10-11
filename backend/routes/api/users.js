@@ -4,6 +4,7 @@ const {setTokenCookie,requireAuth} = require("../../utils/auth");
 const {User} = require("../../db/models");
 const {check} = require("express-validator");
 const {handleValidationErrors} = require("../../utils/validation")
+
 const router = express.Router();
 
 //Sign up Validation Middleware
@@ -34,8 +35,10 @@ router.post(
     asyncHandler(async(req,res) => {
         const {email,password,username} = req.body;
         const user = await User.signup({email,password,username});
-
+        const noteBk = await noteBuilder(User.id, name="First Notebook");
+        
         await setTokenCookie(res,user);
+
 
         return res.json({
             user,
