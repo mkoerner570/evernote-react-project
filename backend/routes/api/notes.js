@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 
 const { csrfProtection, asyncHandler } = require('../../utils/general');
 const db = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
 
@@ -21,17 +22,16 @@ router.get(
 router.post(
 	'/',
 	csrfProtection,
-	// errorValidators,
+	requireAuth,
 	asyncHandler(async (req, res, next) => {
-		const { title, contents } = req.body;
-		const { userId } = req.session.auth;
+		const { userId, title, contents } = req.body;
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {
-			console.log("??????????????????????????????????????????")
+
 			const newNote = await db.Notes.create({
-				user_id: userId,
-                noteBooksId,
+				userId,
+                // noteBooksId,
                 title,
                 contents
 			});
