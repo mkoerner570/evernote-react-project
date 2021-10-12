@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import * as notesAction from "../../store/notes";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 
-
-function NotesForm() {
+function NotesForm({ hideForm }) {
     const dispatch = useDispatch()
     const[title,setTitle] = useState("");
-    const[content,setContent] = useState("")
+    const[contents,setContent] = useState("")
+    const history = useHistory()
+
+    const handleCancelClick = (e) => {
+        e.preventDefault();
+        hideForm();
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        return dispatch(notesAction.writeNote({ title, content })
-        );
+        const payload = {
+            title,
+            contents
+        }
+        let newNote = dispatch(notesAction.writeNote({ title, contents }))
+        console.log(newNote.id)
+        if(newNote){
+            history.push(`/`)
+        }
+        // return dispatch(notesAction.writeNote({ title, contents })
     }
 
     return (
@@ -28,7 +42,7 @@ function NotesForm() {
                 <textarea
                     id='note'
                     type="textarea"
-                    value={content}
+                    value={contents}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Your note here"
                 />

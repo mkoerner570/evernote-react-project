@@ -13,6 +13,7 @@ router.get(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
 		const noteId = req.params.id;
+		console.log("//////////////////////////////",req.params.id)
 
 		const note = await db.Notes.findByPk(noteId, { include: { model: db.Notebooks } });
 

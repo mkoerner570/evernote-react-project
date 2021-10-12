@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotesForm from "./components/NotesForm/NotesForm";
+import NoteDetail from "./components/Notes/Note";
 import "./index.css"
 
 function App() {
@@ -32,6 +33,11 @@ function App() {
           </Route>
         </Switch>
       )}
+    </div>
+    <div>
+      <Switch>
+        <NoteDetail />
+      </Switch>
     </div>
     </>
   );

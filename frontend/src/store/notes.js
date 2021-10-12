@@ -1,7 +1,13 @@
 import { csrfFetch } from "./csrf";
 
+const LOAD = 'session/LOAD';
 const LOAD_NOTE = "session/loadnote"
+const ADD_ONE = 'session/ADD_ONE';
 
+const load = list => ({
+    type: LOAD,
+    list,
+});
 
 const loadnote = (note) => {
     return{
@@ -10,13 +16,27 @@ const loadnote = (note) => {
     }
 }
 
+const addOneNote = note => ({
+    type: ADD_ONE,
+    note,
+});
+
+export const getNote = (id) => async dispatch => {
+    const response = await fetch(`/api/notes/${id}`);
+    if (response.ok) {
+        const item = await response.json();
+        dispatch(addOneNote(item));
+    }
+}
+
 export const writeNote = (note) => async(dispatch) => {
-    const {title,content} = note;
+    const {userId, title,contents} = note;
     const response = await csrfFetch("/api/notes", {
         method:"POST",
         body: JSON.stringify({
+            userId,
             title,
-            content
+            contents
         }),
     });
     const data = await response.json();
@@ -30,11 +50,21 @@ const initialState = {};
 const noteReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-      case LOAD_NOTE:
-        newState = Object.assign({}, state)
-        return newState
-      default:
-        return state;
+        case LOAD: {
+            const allNotes = {};
+            action.list.forEach(notes => {
+              allNotes[notes.id] = notes;
+            });
+            return {
+              ...allNotes,
+              ...state,
+            };
+        }
+        case LOAD_NOTE:
+            newState = Object.assign({}, state)
+            return newState
+        default:
+            return state;
     }
 };
 

@@ -1,10 +1,8 @@
 /* TODO Add site wide styles */
-
-.noteform{
+body{
+    background-color: rgb(48, 48, 48);
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    color: chartreuse;
-    padding: 10%;
 }
-
-#note{}
