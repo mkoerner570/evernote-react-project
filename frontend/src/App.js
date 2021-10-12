@@ -6,7 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
-import NoteBrowser from "./components/Notes";
+import Detail from "./components/Detail/Detail"
 import "./index.css"
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+        <NoteDetail />
       {isLoaded && (
         <Switch>
           <Route path="/signup">
@@ -30,11 +31,6 @@ function App() {
         <NotesForm />
       </Route>
 
-    <div>
-      <Switch>
-        <NoteBrowser />
-      </Switch>
-    </div>
     </>
   );
 }
