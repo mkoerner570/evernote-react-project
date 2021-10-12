@@ -21,7 +21,15 @@ const addOneNote = note => ({
     note,
 });
 
-export const getNote = (id) => async dispatch => {
+export const getNotes = () => async dispatch => {
+    const response = await fetch(`/api/notes`);
+    if (response.ok) {
+        const item = await response.json();
+        dispatch(load(item));
+    }
+}
+
+export const getOneNote = (id) => async dispatch => {
     const response = await fetch(`/api/notes/${id}`);
     if (response.ok) {
         const item = await response.json();
@@ -56,8 +64,7 @@ const noteReducer = (state = initialState, action) => {
               allNotes[notes.id] = notes;
             });
             return {
-              ...allNotes,
-              ...state,
+              allNotes,
             };
         }
         case LOAD_NOTE:

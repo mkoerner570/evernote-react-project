@@ -15,8 +15,8 @@ router.get(
 		const user_Id = req.params.id;
 
 		const note = await db.Notes.findAll({where: {"userId":user_Id}});
-		// console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note)
-	return note
+		console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note)
+	return res.json(note)
 	})
 );
 

@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
+import NoteBrowser from "./components/Notes";
 import "./index.css"
 
 function App() {
@@ -28,18 +29,10 @@ function App() {
       <Route path="/NotesForm">
         <NotesForm />
       </Route>
-    {/* <div className="noteform">
-      {isLoaded && (
-        <Switch>
-          <Route path="/NotesForm">
-           <NotesForm />
-          </Route>
-        </Switch>
-      )}
-    </div> */}
+
     <div>
       <Switch>
-        <NoteDetail />
+        <NoteBrowser />
       </Switch>
     </div>
     </>

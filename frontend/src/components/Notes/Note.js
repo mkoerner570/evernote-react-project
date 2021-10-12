@@ -1,22 +1,19 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNote } from "../../store/notes";
+import { getOneNote } from "../../store/notes";
 
 
 const NoteDetail = () => {
     const userId = useSelector((state) => state.session.user?.id);
-    const currentNote = useSelector((state) => state.notes?.currentNote);
+    const currentNote = useSelector((state) => state.notes.currentNote);
 
-    // const noteId  = useParams();
     const dispatch = useDispatch();
 
-    // console.log(userId)
-    // console.log("//////////////",note)
     console.log(currentNote)
 
     useEffect(() => {
         if (userId) {
-            dispatch(getNote(userId));
+            dispatch(getOneNote(userId));
         }
     }, [userId,dispatch]);
 
