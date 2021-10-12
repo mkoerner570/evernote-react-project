@@ -10,13 +10,15 @@ const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
 router.get(
-	`/:id(\\d+)`,
+	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
-		const userId = req.params.id;
-		console.log("//////////////////////////////",userId)
+		const user_Id = req.params.id;
+		const things = req.url;
 
-		// const note = await db.User.findByPk(userId, { include: { model: db.Note } });
+		console.log(things)
 
+		const note = await db.Notes.findOne({where: {"userId":user_Id}});
+		console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note.contents)
 		// let notebooks;
 
 		// // let userId;
@@ -79,6 +81,7 @@ router.get(
 	// 	} else {
 	// 		next();
 	// 	}
+	return note
 	})
 );
 
