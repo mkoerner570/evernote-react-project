@@ -63,6 +63,10 @@ const noteReducer = (state = initialState, action) => {
         case LOAD_NOTE:
             newState = Object.assign({}, state)
             return newState
+        case ADD_ONE:
+            newState = Object.assign({}, state)
+            newState.currentNote = action.note
+            return newState
         default:
             return state;
     }

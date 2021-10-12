@@ -25,7 +25,10 @@ function App() {
           </Route>
         </Switch>
       )}
-    <div className="noteform">
+      <Route path="/NotesForm">
+        <NotesForm />
+      </Route>
+    {/* <div className="noteform">
       {isLoaded && (
         <Switch>
           <Route path="/NotesForm">
@@ -33,7 +36,7 @@ function App() {
           </Route>
         </Switch>
       )}
-    </div>
+    </div> */}
     <div>
       <Switch>
         <NoteDetail />

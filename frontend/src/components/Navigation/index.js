@@ -29,6 +29,7 @@ function Navigation({ isLoaded }){
       <div className="user">
         {isLoaded && sessionLinks}
       </div>
+      <NavLink to="/NotesForm">Notes</NavLink>
     </nav>
   );
 }

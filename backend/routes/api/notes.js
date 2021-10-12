@@ -13,74 +13,9 @@ router.get(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
 		const user_Id = req.params.id;
-		const things = req.url;
 
-		console.log(things)
-
-		const note = await db.Notes.findOne({where: {"userId":user_Id}});
-		console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note.contents)
-		// let notebooks;
-
-		// // let userId;
-		// console.log(note)
-		// if (req.user.id) {
-		// 	userId = req.user.id;
-
-		// 	notebooks = await db.Notebooks.findAll({
-		// 		where: {
-		// 			userId,
-		// 		},
-		// 		include: db.Note,
-		// 	});
-		// } else {
-		// 	notebooks = [];
-		// }
-
-	// 	let inToolbox = false;
-	// 	let toolboxId;
-	// 	let toolboxName;
-
-	// 	for (const box of toolboxes) {
-	// 		if (!inToolbox) {
-	// 			const apis = box.Apis;
-	// 			for (const api of apis) {
-	// 				if (!inToolbox) {
-	// 					if (api.id === Number(api_id)) {
-	// 						inToolbox = true;
-	// 						toolboxId = box.id;
-	// 						toolboxName = box.name;
-	// 						break;
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-
-	// 	const toolboxInfo = { inToolbox, toolboxId, toolboxName };
-
-	// 	const reviews = await db.Review.findAll({
-	// 		where: {
-	// 			api_id,
-	// 		},
-	// 		order: [['updatedAt', 'DESC']],
-	// 		include: { model: db.User },
-	// 	});
-
-	// 	const avgNumber = await reviewAvgRating(api_id);
-
-	// 	if (api) {
-	// 		return res.render('api', {
-	// 			title: `Ace API - ${api.name}`,
-	// 			api,
-	// 			toolboxes,
-	// 			avgRating: avgNumber,
-	// 			reviews,
-	// 			user_id,
-	// 			toolboxInfo,
-	// 		});
-	// 	} else {
-	// 		next();
-	// 	}
+		const note = await db.Notes.findAll({where: {"userId":user_Id}});
+		// console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note)
 	return note
 	})
 );
