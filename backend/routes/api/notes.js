@@ -10,28 +10,29 @@ const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
 router.get(
-	'/:id(\\d+)',
+	`/:id(\\d+)`,
 	asyncHandler(async (req, res, next) => {
-		const noteId = req.params.id;
-		console.log("//////////////////////////////",req.params.id)
+		const userId = req.params.id;
+		console.log("//////////////////////////////",userId)
 
-		const note = await db.Notes.findByPk(noteId, { include: { model: db.Notebooks } });
+		// const note = await db.User.findByPk(userId, { include: { model: db.Note } });
 
-		let notebooks;
+		// let notebooks;
 
-		let userId;
-		if (req.user.id) {
-			userId = req.user.id;
+		// // let userId;
+		// console.log(note)
+		// if (req.user.id) {
+		// 	userId = req.user.id;
 
-			notebooks = await db.Notebooks.findAll({
-				where: {
-					userId,
-				},
-				include: db.Note,
-			});
-		} else {
-			notebooks = [];
-		}
+		// 	notebooks = await db.Notebooks.findAll({
+		// 		where: {
+		// 			userId,
+		// 		},
+		// 		include: db.Note,
+		// 	});
+		// } else {
+		// 	notebooks = [];
+		// }
 
 	// 	let inToolbox = false;
 	// 	let toolboxId;

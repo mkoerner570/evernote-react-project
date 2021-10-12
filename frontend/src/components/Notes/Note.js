@@ -5,20 +5,21 @@ import { getNote } from "../../store/notes";
 
 
 const NoteDetail = () => {
-    const userId = useSelector(user => user.session.user.id)
-    const noteId = useSelector(notes => notes)
+    const userId = useSelector(state => state.session.user.id)
+    // const note = useSelector(state => state.notes)
 
     // const noteId  = useParams();
     const dispatch = useDispatch();
 
-    console.log("////////////",userId)
-    console.log("////////////",noteId)
+    console.log(userId)
+    // console.log("//////////////",note)
+    // console.log(noteId)
 
-    // useEffect(() => {
-    //     dispatch(getNote(note));
-    //     // setShowEditPokeForm(false);
-    //     // setEditItemId(null);
-    // }, [note,dispatch]);
+    useEffect(() => {
+        dispatch(getNote(userId));
+        // setShowEditPokeForm(false);
+        // setEditItemId(null);
+    }, [userId,dispatch]);
 
     // let content = null;
 
