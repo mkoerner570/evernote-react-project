@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteNote, getOneNote } from "../../store/notes";
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Dispatch } from 'react';
 
 
@@ -11,6 +11,7 @@ const Detail = ({ notes }) => {
     const dispatch = useDispatch();
     const currentNote = useSelector((state) => state.notes.currentNote);
     const [deleteRequest,setDeleteRequest] = useState(false)
+    const history = useHistory()
 
     const test = {};
     if(currentNote !== undefined){
@@ -31,6 +32,7 @@ const Detail = ({ notes }) => {
         if(deleteRequest){
             console.log(noteId.Id)
             dispatch(deleteNote(noteId.Id));
+            // history.push('/')
         }
     }, [deleteRequest]);
 

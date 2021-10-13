@@ -47,6 +47,8 @@ router.post(
 router.delete(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
+		const noteId = req.params.id;
+		console.log(noteId)
 		const findnote = await db.Note.findByPk(req.params.id);
 		console.log("77777777777777777777777777777",findnote)
 		if (findnote) {

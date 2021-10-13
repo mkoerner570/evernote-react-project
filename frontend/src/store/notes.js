@@ -65,7 +65,7 @@ export const writeNote = (note) => async(dispatch) => {
 }
 
 export const editNote = (newData) => async dispatch => {
-    const response = await fetch(`/api/notes/${newData.id}`,{
+    const response = await csrfFetch(`/api/notes/${newData.id}`,{
       method:'PUT',
       headers: {'Content-Type': 'application/json',},
       body: JSON.stringify(newData),
@@ -79,7 +79,7 @@ export const editNote = (newData) => async dispatch => {
 };
 
 export const deleteNote = (noteId) => async dispatch => {
-    const response = await fetch(`/api/notes/${noteId}`,{
+    const response = await csrfFetch(`/api/notes/${noteId}`,{
         method:'DELETE',
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(noteId),
