@@ -7,24 +7,28 @@ import { Dispatch } from 'react';
 
 
 const Detail = ({ notes }) => {
-    const currentTitle = useSelector(state => state.notes.currentNote)
-    // const selectedNote = notes.find()
     const noteId = useParams()
     const dispatch = useDispatch();
-    console.log(noteId)
-    console.log(notes)
-    const display = notes.map(note => Object.values(note))
-    console.log(display)
-    
+    const currentNote = useSelector((state) => state.notes.currentNote);
+
+    const test = {};
+    if(currentNote !== undefined){
+        currentNote.forEach(ele => {
+            test[ele.id] = ele
+        });
+    }
+
+    const content = test[+noteId.Id]?.contents
+
     useEffect(() => {
-        if (noteId) {
-            dispatch(getOneNote(noteId));
+        if (noteId.id) {
+            dispatch(getOneNote(noteId.id));
         }
-    }, [noteId,dispatch]);
+    }, [noteId.id,dispatch]);
 
     return (
-        <div>
-            <p>thigns</p>
+        <div className="content">
+            <p>{content}</p>
         </div>
     )
 }

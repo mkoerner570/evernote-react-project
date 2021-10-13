@@ -25,7 +25,10 @@ function Navigation({ isLoaded }){
 
   return (
     <nav className="nav">
-      <NavLink className="homename" exact to="/">BIG</NavLink>
+      <NavLink className="homename" exact to="/">
+      <img src="https://www.clipartmax.com/png/small/202-2023602_dumbbell-physical-fitness-bodybuilding-icon-mancuernas-vector.png" alt="Dumbbell Physical Fitness Bodybuilding Icon - Mancuernas Vector @clipartmax.com">
+        </img>
+      </NavLink>
       <div className="user">
         {isLoaded && sessionLinks}
       </div>

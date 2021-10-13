@@ -30,9 +30,10 @@ function NotesForm({ hideForm }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form className="noteForm" onSubmit={handleSubmit}>
+            <label className="noteForms">
                 <input
+                    id='title'
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -47,7 +48,7 @@ function NotesForm({ hideForm }) {
                     placeholder="Your note here"
                 />
             </label>
-            <button type="submit">Submit</button>
+            <button id="submit" type="submit">Submit</button>
         </form>
     )
 }

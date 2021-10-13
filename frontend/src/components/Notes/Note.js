@@ -1,33 +1,43 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getOneNote } from "../../store/notes";
-import { Route } from 'react-router';
+import { Route, useHistory } from 'react-router';
 import Detail from "../Detail/Detail"
 
 
 const NoteDetail = () => {
     const userId = useSelector((state) => state.session.user?.id);
     const currentNote = useSelector((state) => state.notes.currentNote);
-    const [selected, SetSelected] = useState("")
+    const [selected, SetSelected] = useState(null)
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
         if (userId) {
             dispatch(getOneNote(userId));
         }
     }, [userId,dispatch]);
+    function handleChange(value){
+        history.push(`/note/${value}`)
+    }
 
     return (
         <div className="note">
             <div className="noteTitle">
-                <div>
+                {/* <div>
                     {currentNote?.map( note => (
-                        <NavLink to={`/note/${note.id}`}> ({note.title}) </NavLink>
+                        <Link to={`/note/${note.id}`}> ({note.title}) </Link>
                     ))}
-                </div>
+                </div> */}
+                <select classname="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
+                    <option>Select</option>
+                    {currentNote?.map(note => (
+                        <option value={note.id}> {note.title} </option>
+                    ))}
+                </select>
             </div>
-            <Route path="/note/:id">
+            <Route path="/note/:Id">
                 <Detail notes={currentNote}/>
             </Route>
         </div>
