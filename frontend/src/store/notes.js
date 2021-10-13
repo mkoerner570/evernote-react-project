@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf";
 const LOAD = 'notes/LOAD';
 const LOAD_NOTE = "notes/loadnote"
 const ADD_ONE = 'notes/ADD_ONE';
+const REMOVE_NOTE = "notes/REMOVE_NOTE";
+const UPDATE_NOTE = "notes/UPDATE_NOTE";
 
 const load = list => ({
     type: LOAD,
@@ -19,6 +21,16 @@ const loadnote = (note) => {
 const addOneNote = note => ({
     type: ADD_ONE,
     note,
+});
+
+const remove = (noteId) => ({
+    type: REMOVE_NOTE,
+    noteId,
+});
+
+const update = (noteId) => ({
+    type: UPDATE_NOTE,
+    noteId,
 });
 
 export const getNotes = () => async dispatch => {
@@ -52,6 +64,30 @@ export const writeNote = (note) => async(dispatch) => {
     return response;
 }
 
+export const editNote = (newData) => async dispatch => {
+    const response = await fetch(`/api/notes/${newData.id}`,{
+      method:'PUT',
+      headers: {'Content-Type': 'application/json',},
+      body: JSON.stringify(newData),
+    });
+
+    if (response.ok) {
+      const item = await response.json();
+      dispatch(addOneNote(item));
+      return item
+    }
+};
+
+export const deleteNote = (noteId) => async dispatch => {
+    const response = await fetch(`/api/notes/${noteId}`,{
+        method:'DELETE',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(noteId),
+    })
+    console.log("5555555555555555", response)
+    return response;
+}
+
 
 const initialState = {};
 
@@ -74,6 +110,17 @@ const noteReducer = (state = initialState, action) => {
             newState = Object.assign({}, state)
             newState.currentNote = action.note
             return newState
+        case UPDATE_NOTE: {
+            return {
+              ...state,
+              [action.item.id]: action.item,
+            };
+        }
+        case REMOVE_NOTE: {
+            const newState = { ...state };
+            delete newState[action.itemId];
+            return newState;
+        }
         default:
             return state;
     }

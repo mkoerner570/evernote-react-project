@@ -18,6 +18,7 @@ const NoteDetail = () => {
             dispatch(getOneNote(userId));
         }
     }, [userId,dispatch]);
+
     function handleChange(value){
         history.push(`/note/${value}`)
     }

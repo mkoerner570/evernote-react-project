@@ -15,7 +15,6 @@ router.get(
 		const user_Id = req.params.id;
 
 		const note = await db.Notes.findAll({where: {"userId":user_Id}});
-		console.log("++++++++++++++++++++++++++++++++++++++++++++++++",note)
 	return res.json(note)
 	})
 );
@@ -42,6 +41,20 @@ router.post(
 				newNote,
 			});
         }
+	})
+);
+
+router.delete(
+	'/:id(\\d+)',
+	asyncHandler(async (req, res, next) => {
+		const findnote = await db.Note.findByPk(req.params.id);
+		console.log("77777777777777777777777777777",findnote)
+		if (findnote) {
+			const note = await findnote.destroy();
+			res.status(204).end();
+		} else {
+			next();
+		}
 	})
 );
 
