@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOneNote } from "../../store/notes";
 import { Route, useHistory } from 'react-router';
 import Detail from "../Detail/Detail"
+import Edit from '../Edit/Edit';
 
 
 const NoteDetail = () => {
@@ -40,6 +41,9 @@ const NoteDetail = () => {
             </div>
             <Route path="/note/:Id">
                 <Detail notes={currentNote}/>
+            </Route>
+            <Route path="/note/:Id/edit">
+                <Edit notes={currentNote}/>
             </Route>
         </div>
     )

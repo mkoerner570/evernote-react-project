@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { deleteNote, getOneNote } from "../../store/notes";
+import { deleteNote, editNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
 // import { Dispatch } from 'react';
 
@@ -11,6 +11,7 @@ const Detail = ({ notes }) => {
     const dispatch = useDispatch();
     const currentNote = useSelector((state) => state.notes.currentNote);
     const [deleteRequest,setDeleteRequest] = useState(false)
+    const [editRequest, setEditRequest] = useState(false)
     const history = useHistory()
 
     const test = {};
@@ -36,17 +37,18 @@ const Detail = ({ notes }) => {
         }
     }, [deleteRequest]);
 
-    // useEffect(() => {
-    //     if (noteId.id) {
-    //         dispatch(getOneNote(noteId.id));
-    //     }
-    // }, [noteId.id,dispatch]);
+    useEffect(() => {
+        if (editRequest) {
+            dispatch(editNote(noteId.id));
+            console.log("things")
+        }
+    }, [editRequest]);
 
     return (
         <div className="content">
             <p>{content}</p>
             <div>
-                <button >Edit Note</button>
+                <button onClick={() => setEditRequest()}>Edit Note</button>
                 <button onClick={() => setDeleteRequest(true)}>Delete Note</button>
             </div>
         </div>

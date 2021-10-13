@@ -64,16 +64,16 @@ export const writeNote = (note) => async(dispatch) => {
     return response;
 }
 
-export const editNote = (newData) => async dispatch => {
-    const response = await csrfFetch(`/api/notes/${newData.id}`,{
+export const editNote = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/notes/${data.id}`,{
       method:'PUT',
       headers: {'Content-Type': 'application/json',},
-      body: JSON.stringify(newData),
+      body: JSON.stringify({data}),
     });
 
     if (response.ok) {
       const item = await response.json();
-      dispatch(addOneNote(item));
+      dispatch(update(item));
       return item
     }
 };

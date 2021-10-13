@@ -34,7 +34,7 @@ function Navigation({ isLoaded }){
         {isLoaded && sessionLinks}
       </div>
       <NavLink to="/NotesForm">Notes</NavLink>
-      <NoteDetail />
+      {/* <NoteDetail /> */}
     </nav>
   );
 }
