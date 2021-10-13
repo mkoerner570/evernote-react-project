@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-import { deleteNote, editNote, getOneNote } from "../../store/notes";
+import { Link } from 'react-router-dom';
+import { deleteNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import Edit from '../Edit/Edit';
+import { Route } from 'react-router';
 // import { Dispatch } from 'react';
 
 
@@ -22,6 +25,7 @@ const Detail = ({ notes }) => {
     }
 
     const content = test[+noteId.Id]?.contents
+    const id = test[+noteId.Id]?.id
 
     useEffect(() => {
         if (noteId.id) {
@@ -39,8 +43,8 @@ const Detail = ({ notes }) => {
 
     useEffect(() => {
         if (editRequest) {
-            dispatch(editNote(noteId.id));
             console.log("things")
+            history.push(`/note/${id}/edit`)
         }
     }, [editRequest]);
 
@@ -48,7 +52,7 @@ const Detail = ({ notes }) => {
         <div className="content">
             <p>{content}</p>
             <div>
-                <button onClick={() => setEditRequest()}>Edit Note</button>
+                <button onClick={() => setEditRequest(true)}>Edit Note</button>
                 <button onClick={() => setDeleteRequest(true)}>Delete Note</button>
             </div>
         </div>

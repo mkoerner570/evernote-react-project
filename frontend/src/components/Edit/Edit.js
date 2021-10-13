@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
-import * as notesAction from "../../store/notes";
+import { editNote } from '../../store/notes';
 
 const Edit = ({ notes }) => {
     const noteId = useParams()
@@ -20,27 +20,27 @@ const Edit = ({ notes }) => {
     }
     const titles = test[+noteId.Id]?.title
     const content = test[+noteId.Id]?.contents
+    const notess = test[+noteId.Id]?.id
 
-    console.log("noteId",noteId.Id)
-    console.log(currentNote)
-    console.log(content)
-    console.log("title.....", titles)
+    const[editedTitle,setEditedTitle] = useState(titles);
+    const[editContents,setEditContents] = useState(content)
 
-    const[editedTitle,setEditedTitle] = useState("");
-    const[editContents,setEditContent] = useState("")
+    useEffect(() => {
+        if(titles) setEditedTitle(titles)
+        if(content) setEditContents(content)
+    },[titles, content])
 
     const handleEdit = (e) => {
         e.preventDefault();
         const payload = {
+            notess,
             editedTitle,
             editContents
         }
-        let editedNote = dispatch(notesAction.editNote(payload))
-        console.log(editedNote)
+        let editedNote = dispatch(editNote(notess, editedTitle,editContents))
         if(editedNote){
             history.push(`/note/${noteId.Id}`)
         }
-        // return dispatch(notesAction.writeNote({ title, contents })
     }
 
     return(
@@ -49,14 +49,14 @@ const Edit = ({ notes }) => {
                 <input
                     id='title'
                     type="text"
-                    value={titles}
+                    value={editedTitle}
                     onChange={(e) => setEditedTitle(e.target.value)}
                 />
                 <textarea
                     id='note'
                     type="textarea"
-                    value={content}
-                    onChange={(e) => setEditContent(e.target.value)}
+                    value={editContents}
+                    onChange={(e) => setEditContents(e.target.value)}
                 />
             </label>
             <button id="submit" type="submit">Submit</button>

@@ -35,7 +35,7 @@ const NoteDetail = () => {
                 <select className="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
                     <option>Select a note</option>
                     {currentNote?.map(note => (
-                        <option value={note.id}> {note.title} </option>
+                        <option key={note.id} value={note.id}> {note.title} </option>
                     ))}
                 </select>
             </div>
