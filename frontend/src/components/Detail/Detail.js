@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { deleteNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
-import { Dispatch } from 'react';
+// import { Dispatch } from 'react';
 
 
 const Detail = ({ notes }) => {
@@ -32,7 +32,7 @@ const Detail = ({ notes }) => {
         if(deleteRequest){
             console.log(noteId.Id)
             dispatch(deleteNote(noteId.Id));
-            // history.push('/')
+            history.push('/notes')
         }
     }, [deleteRequest]);
 

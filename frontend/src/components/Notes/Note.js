@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { getOneNote } from "../../store/notes";
 import { Route, useHistory } from 'react-router';
 import Detail from "../Detail/Detail"
@@ -31,8 +31,8 @@ const NoteDetail = () => {
                         <Link to={`/note/${note.id}`}> ({note.title}) </Link>
                     ))}
                 </div> */}
-                <select classname="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
-                    <option>Select</option>
+                <select className="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
+                    <option>Select a note</option>
                     {currentNote?.map(note => (
                         <option value={note.id}> {note.title} </option>
                     ))}

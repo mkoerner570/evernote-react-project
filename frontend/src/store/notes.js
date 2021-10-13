@@ -82,9 +82,8 @@ export const deleteNote = (noteId) => async dispatch => {
     const response = await csrfFetch(`/api/notes/${noteId}`,{
         method:'DELETE',
         headers: {'Content-Type': 'application/json',},
-        body: JSON.stringify(noteId),
+        // body: JSON.stringify(noteId),
     })
-    console.log("5555555555555555", response)
     return response;
 }
 
