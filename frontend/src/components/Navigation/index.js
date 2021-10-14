@@ -28,7 +28,7 @@ function Navigation({ isLoaded }){
   return (
     <nav className="nav">
       <NavLink className="homename" exact to="/">
-      <img id="icon" src="https://www.clipartmax.com/png/small/202-2023602_dumbbell-physical-fitness-bodybuilding-icon-mancuernas-vector.png" alt="Dumbbell Physical Fitness Bodybuilding Icon - Mancuernas Vector @clipartmax.com">
+      <img id="icon" src="https://res.cloudinary.com/duqceaiyi/image/upload/v1634239823/dumbbell-64_ran5ph.png">
         </img>
       </NavLink>
       <div className="user">

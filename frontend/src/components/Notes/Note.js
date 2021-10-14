@@ -6,6 +6,8 @@ import { Route, useHistory } from 'react-router';
 import Detail from "../Detail/Detail"
 import Edit from '../Edit/Edit';
 import { getOneNotebook } from '../../store/notebooks';
+import BookDetail from '../BookDetail/BookDetail';
+import BookEdit from '../BookEdit/BookEdit';
 
 
 const NoteDetail = () => {
@@ -16,8 +18,6 @@ const NoteDetail = () => {
     const dispatch = useDispatch();
     const history = useHistory()
 
-    console.log("777777777777777777",currentNotebook)
-
     useEffect(() => {
         if (userId) {
             dispatch(getOneNote(userId));
@@ -27,6 +27,7 @@ const NoteDetail = () => {
 
     function handleChange(value){
         history.push(`/note/${value}`)
+        history.push(`/notebook/${value}`)
     }
 
     return (
@@ -43,7 +44,7 @@ const NoteDetail = () => {
                         <option key={note.id} value={note.id}> {note.title} </option>
                     ))}
                 </select>
-                <select>
+                <select className="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
                     <option>Select a Notebook</option>
                     {currentNotebook?.map(book => (
                         <option key={book.id} value={book.id}> {book.title} </option>
@@ -57,7 +58,10 @@ const NoteDetail = () => {
                 <Edit notes={currentNote}/>
             </Route>
             <Route path="/notebook/:Id">
-                
+                <BookDetail books={currentNotebook}/>
+            </Route>
+            <Route path="/notebook/:Id/edit">
+                <BookEdit books={currentNotebook}/>
             </Route>
         </div>
     )

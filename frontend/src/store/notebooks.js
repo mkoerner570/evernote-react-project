@@ -64,7 +64,8 @@ export const makeNotebook = (notebook) => async(dispatch) => {
 }
 
 export const editNotebook = (id, title, contents) => async dispatch => {
-    let payload = {id, title, contents}
+    let payload = {id, title}
+    console.log(payload)
     const response = await csrfFetch(`/api/notebooks/${id}`,{
       method:'PUT',
       body: JSON.stringify(payload),

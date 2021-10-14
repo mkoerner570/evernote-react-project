@@ -41,25 +41,24 @@ router.post(
 	})
 );
 
-// router.put(
-// 	`/:id(\\d+)`,
-// 	csrfProtection,
-// 	requireAuth,
-// 	asyncHandler(async (req, res, next) => {
-// 		const { id, title, contents } = req.body;
+router.put(
+	`/:id(\\d+)`,
+	csrfProtection,
+	requireAuth,
+	asyncHandler(async (req, res, next) => {
+		const { id, title, } = req.body;
 
-// 		const noteId = req.params.id;
-// 		const editedNote = await db.Notebooks.findByPk(noteId);
-// 		if (editedNote) {
-// 			editedNote.title = title;
-// 			editedNote.contents = contents;
+		const noteId = req.params.id;
+		const editedNote = await db.Notebook.findByPk(noteId);
+		if (editedNote) {
+			editedNote.title = title;
 
-// 			await editedNote.save();
+			await editedNote.save();
 
-// 			return res;
-// 		}
-// 	})
-// );
+			return res;
+		}
+	})
+);
 
 router.delete(
 	'/:id(\\d+)',
