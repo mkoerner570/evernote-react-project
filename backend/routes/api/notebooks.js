@@ -13,7 +13,7 @@ router.get(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
 		const user_Id = req.params.id;
-		console.log(user_Id)
+		console.log("the user..................",user_Id)
 		const note = await db.Notebook.findAll({where: {"userId":user_Id}});
 	return res.json(note)
 	})

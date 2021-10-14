@@ -44,7 +44,7 @@ const NoteDetail = () => {
                     ))}
                 </select>
                 <select>
-                    <option>select a Notebook</option>
+                    <option>Select a Notebook</option>
                     {/* {currentNotebook?.map(book => (
                         <option key={book.id} value={book.id}> {book.title} </option>
                     ))} */}
