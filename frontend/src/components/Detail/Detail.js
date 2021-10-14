@@ -25,13 +25,14 @@ const Detail = ({ notes }) => {
     }
 
     const content = test[+noteId.Id]?.contents
+    const Name = test[+noteId.Id]?.title
     const id = test[+noteId.Id]?.id
 
     useEffect(() => {
         if (noteId.id) {
-            dispatch(getOneNote(noteId.id));
+            dispatch(getOneNote(id));
         }
-    }, [noteId.id,dispatch]);
+    }, [id,dispatch]);
 
     useEffect(() => {
         if(deleteRequest){
@@ -50,6 +51,7 @@ const Detail = ({ notes }) => {
 
     return (
         <div className="content">
+            <h2>{Name}</h2>
             <p>{content}</p>
             <div>
                 <button onClick={() => setEditRequest(true)}>Edit Note</button>

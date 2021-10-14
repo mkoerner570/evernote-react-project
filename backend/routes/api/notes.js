@@ -50,23 +50,16 @@ router.put(
 	requireAuth,
 	asyncHandler(async (req, res, next) => {
 		const { id, title, contents } = req.body;
-		console.log("the body of req......",req.body)
 
 		const noteId = req.params.id;
 		const editedNote = await db.Notes.findByPk(noteId);
-		// console.log("55555555555555555",noteId)
-		console.log("000000000",editedNote.title)
-		console.log("666666666666",editedNote.contents)
-
 		if (editedNote) {
 			editedNote.title = title;
 			editedNote.contents = contents;
-			console.log("the new note title=========",editedNote.title)
-			console.log("the new content of the note ------",editedNote.contents)
 
 			await editedNote.save();
 
-			return res.json();
+			return res;
 		}
 	})
 );

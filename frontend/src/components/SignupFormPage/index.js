@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -10,7 +10,17 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [credential, setCredential] = useState('');
   const [errors, setErrors] = useState([]);
+  const [demoUser, setDemoUser] = useState(false)
+
+  useEffect(() => {
+    if(demoUser){
+      setCredential("Demo-lition");
+      setPassword("password")
+      return dispatch(sessionActions.login({ credential, password }))
+    }
+  },[demoUser])
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -69,6 +79,7 @@ function SignupFormPage() {
         />
       </label>
       <button type="submit">Sign Up</button>
+      <button type="submit" onClick={() => setDemoUser(true)}>Demo User</button>
     </form>
   );
 }

@@ -66,7 +66,6 @@ export const writeNote = (note) => async(dispatch) => {
 
 export const editNote = (id, title, contents) => async dispatch => {
     let payload = {id, title, contents}
-    console.log("testing payload==========",JSON.stringify(payload))
     const response = await csrfFetch(`/api/notes/${id}`,{
       method:'PUT',
       body: JSON.stringify(payload),

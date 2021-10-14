@@ -11,6 +11,15 @@ function LoginFormPage() {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
+  const [demoUser, setDemoUser] = useState(false)
+
+  useEffect(() => {
+    if(demoUser){
+      setCredential("Demo-lition");
+      setPassword("password")
+      return dispatch(sessionActions.login({ credential, password }))
+    }
+  },[demoUser])
 
   if (sessionUser) return (
     <Redirect to="/" />
@@ -50,6 +59,7 @@ function LoginFormPage() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button type="submit" onClick={() => setDemoUser(true)}>Demo User</button>
     </form>
   );
 }
