@@ -106,7 +106,7 @@ const noteBookReducer = (state = initialState, action) => {
             return newState
         case ADD_ONE:
             newState = Object.assign({}, state)
-            newState.currentNotebook = action.note
+            newState.currentNotebook = action.notebook
             return newState
         case UPDATE_NOTE: {
             return {

@@ -11,7 +11,7 @@ import { getOneNotebook } from '../../store/notebooks';
 const NoteDetail = () => {
     const userId = useSelector((state) => state.session.user?.id);
     const currentNote = useSelector((state) => state.notes.currentNote);
-    const currentNotebook = useSelector((state) => state.notebooks);
+    const currentNotebook = useSelector((state) => state.notebooks.currentNotebook);
     const [selected, SetSelected] = useState(null)
     const dispatch = useDispatch();
     const history = useHistory()
@@ -45,9 +45,9 @@ const NoteDetail = () => {
                 </select>
                 <select>
                     <option>Select a Notebook</option>
-                    {/* {currentNotebook?.map(book => (
+                    {currentNotebook?.map(book => (
                         <option key={book.id} value={book.id}> {book.title} </option>
-                    ))} */}
+                    ))}
                 </select>
             </div>
             <Route path="/note/:Id">
@@ -55,6 +55,9 @@ const NoteDetail = () => {
             </Route>
             <Route path="/note/:Id/edit">
                 <Edit notes={currentNote}/>
+            </Route>
+            <Route path="/notebook/:Id">
+                
             </Route>
         </div>
     )

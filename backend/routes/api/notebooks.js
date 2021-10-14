@@ -13,7 +13,7 @@ router.get(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
 		const user_Id = req.params.id;
-		console.log("the user..................",user_Id)
+
 		const note = await db.Notebook.findAll({where: {"userId":user_Id}});
 	return res.json(note)
 	})
@@ -26,8 +26,6 @@ router.post(
 	asyncHandler(async (req, res, next) => {
 		const { title } = req.body;
 		const user_Id = req.user.id;
-		console.log("the title...................",title)
-		console.log("the user id.............",user_Id)
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {
@@ -63,20 +61,20 @@ router.post(
 // 	})
 // );
 
-// router.delete(
-// 	'/:id(\\d+)',
-// 	requireAuth,
-// 	asyncHandler(async (req, res, next) => {
-// 		const noteId = req.params.id;
-// 		const findnote = await db.Notebooks.findByPk(noteId);
-// 		if (findnote) {
-// 			const note = await findnote.destroy();
-// 			res.status(204).end();
-// 		} else {
-// 			next();
-// 		}
-// 	})
-// );
+router.delete(
+	'/:id(\\d+)',
+	requireAuth,
+	asyncHandler(async (req, res, next) => {
+		const noteId = req.params.id;
+		const findnote = await db.Notebook.findByPk(noteId);
+		if (findnote) {
+			const note = await findnote.destroy();
+			res.status(204).end();
+		} else {
+			next();
+		}
+	})
+);
 
 
 module.exports = router;
