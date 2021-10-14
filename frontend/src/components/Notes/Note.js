@@ -5,18 +5,23 @@ import { getOneNote } from "../../store/notes";
 import { Route, useHistory } from 'react-router';
 import Detail from "../Detail/Detail"
 import Edit from '../Edit/Edit';
+import { getOneNotebook } from '../../store/notebooks';
 
 
 const NoteDetail = () => {
     const userId = useSelector((state) => state.session.user?.id);
     const currentNote = useSelector((state) => state.notes.currentNote);
+    const currentNotebook = useSelector((state) => state.notebooks);
     const [selected, SetSelected] = useState(null)
     const dispatch = useDispatch();
     const history = useHistory()
 
+    console.log("777777777777777777",currentNotebook)
+
     useEffect(() => {
         if (userId) {
             dispatch(getOneNote(userId));
+            dispatch(getOneNotebook(userId))
         }
     }, [userId,dispatch]);
 
@@ -37,6 +42,12 @@ const NoteDetail = () => {
                     {currentNote?.map(note => (
                         <option key={note.id} value={note.id}> {note.title} </option>
                     ))}
+                </select>
+                <select>
+                    <option>select a Notebook</option>
+                    {/* {currentNotebook?.map(book => (
+                        <option key={book.id} value={book.id}> {book.title} </option>
+                    ))} */}
                 </select>
             </div>
             <Route path="/note/:Id">

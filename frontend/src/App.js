@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
+import NotesBooksForm from "./components/NotebooksForm/NotebooksForm";
 import Detail from "./components/Detail/Detail"
 import "./index.css"
 
@@ -29,6 +30,9 @@ function App() {
       )}
       <Route path="/NotesForm">
         <NotesForm />
+      </Route>
+      <Route path="/NotesBooksForm">
+        <NotesBooksForm />
       </Route>
 
     </>

@@ -13,8 +13,8 @@ router.get(
 	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
 		const user_Id = req.params.id;
-
-		const note = await db.Notes.findAll({where: {"userId":user_Id}});
+		console.log(user_Id)
+		const note = await db.Notebook.findAll({where: {"userId":user_Id}});
 	return res.json(note)
 	})
 );
@@ -24,18 +24,17 @@ router.post(
 	csrfProtection,
 	requireAuth,
 	asyncHandler(async (req, res, next) => {
-		const { title, contents } = req.body;
-		const userId = req.user.id;
-		console.log(userId)
+		const { title } = req.body;
+		const user_Id = req.user.id;
+		console.log("the title...................",title)
+		console.log("the user id.............",user_Id)
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {
 
-			const newNote = await db.Notes.create({
-				userId: userId,
-                // noteBooksId,
-                title,
-                contents
+			const newNote = await db.Notebook.create({
+				userId: user_Id,
+                title
 			});
 			return res.json({
 				newNote,
@@ -44,40 +43,40 @@ router.post(
 	})
 );
 
-router.put(
-	`/:id(\\d+)`,
-	csrfProtection,
-	requireAuth,
-	asyncHandler(async (req, res, next) => {
-		const { id, title, contents } = req.body;
+// router.put(
+// 	`/:id(\\d+)`,
+// 	csrfProtection,
+// 	requireAuth,
+// 	asyncHandler(async (req, res, next) => {
+// 		const { id, title, contents } = req.body;
 
-		const noteId = req.params.id;
-		const editedNote = await db.Notes.findByPk(noteId);
-		if (editedNote) {
-			editedNote.title = title;
-			editedNote.contents = contents;
+// 		const noteId = req.params.id;
+// 		const editedNote = await db.Notebooks.findByPk(noteId);
+// 		if (editedNote) {
+// 			editedNote.title = title;
+// 			editedNote.contents = contents;
 
-			await editedNote.save();
+// 			await editedNote.save();
 
-			return res;
-		}
-	})
-);
+// 			return res;
+// 		}
+// 	})
+// );
 
-router.delete(
-	'/:id(\\d+)',
-	requireAuth,
-	asyncHandler(async (req, res, next) => {
-		const noteId = req.params.id;
-		const findnote = await db.Notes.findByPk(noteId);
-		if (findnote) {
-			const note = await findnote.destroy();
-			res.status(204).end();
-		} else {
-			next();
-		}
-	})
-);
+// router.delete(
+// 	'/:id(\\d+)',
+// 	requireAuth,
+// 	asyncHandler(async (req, res, next) => {
+// 		const noteId = req.params.id;
+// 		const findnote = await db.Notebooks.findByPk(noteId);
+// 		if (findnote) {
+// 			const note = await findnote.destroy();
+// 			res.status(204).end();
+// 		} else {
+// 			next();
+// 		}
+// 	})
+// );
 
 
 module.exports = router;

@@ -34,39 +34,38 @@ const update = (notebookId) => ({
 });
 
 export const getNotes = () => async dispatch => {
-    const response = await fetch(`/api/notes`);
+    const response = await fetch(`/api/notebooks`);
     if (response.ok) {
         const item = await response.json();
-        dispatch(addOneNote(item));
+        dispatch(addOneNotebook(item));
     }
 }
 
 export const getOneNotebook = (id) => async dispatch => {
-    const response = await fetch(`/api/notes/${id}`);
+    const response = await fetch(`/api/notebooks/${id}`);
     if (response.ok) {
         const item = await response.json();
-        dispatch(addOneNote(item));
+        dispatch(addOneNotebook(item));
     }
 }
 
 export const makeNotebook = (notebook) => async(dispatch) => {
-    const {userId, title,contents} = note;
-    const response = await csrfFetch("/api/notes", {
+    const {userId, title,contents} = notebook;
+    const response = await csrfFetch("/api/notebooks", {
         method:"POST",
         body: JSON.stringify({
             userId,
             title,
-            contents
         }),
     });
     const data = await response.json();
-    dispatch(loadnote(data.note));
+    dispatch(loadnotebook(data.note));
     return response;
 }
 
 export const editNotebook = (id, title, contents) => async dispatch => {
     let payload = {id, title, contents}
-    const response = await csrfFetch(`/api/notes/${id}`,{
+    const response = await csrfFetch(`/api/notebooks/${id}`,{
       method:'PUT',
       body: JSON.stringify(payload),
     });
@@ -79,7 +78,7 @@ export const editNotebook = (id, title, contents) => async dispatch => {
 };
 
 export const deleteNotebook = (notebookId) => async dispatch => {
-    const response = await csrfFetch(`/api/notes/${noteId}`,{
+    const response = await csrfFetch(`/api/notebooks/${notebookId}`,{
         method:'DELETE',
         headers: {'Content-Type': 'application/json',},
         // body: JSON.stringify(noteId),
@@ -107,7 +106,7 @@ const noteBookReducer = (state = initialState, action) => {
             return newState
         case ADD_ONE:
             newState = Object.assign({}, state)
-            newState.currentNote = action.note
+            newState.currentNotebook = action.note
             return newState
         case UPDATE_NOTE: {
             return {
