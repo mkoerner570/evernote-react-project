@@ -27,7 +27,7 @@ const NoteDetail = () => {
 
     function handleChange(value){
         history.push(`/note/${value}`)
-        history.push(`/notebook/${value}`)
+        // history.push(`/notebook/${value}`)
     }
 
     return (

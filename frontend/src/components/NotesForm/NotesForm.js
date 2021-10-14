@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import * as notesAction from "../../store/notes";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 
 function NotesForm({ hideForm }) {
     const dispatch = useDispatch()
-    const[title,setTitle] = useState("");
-    const[contents,setContent] = useState("")
+    const currentNotebook = useSelector((state) => state.notebooks.currentNotebook);
+    const [title,setTitle] = useState("");
+    const [contents,setContent] = useState("")
+    const [noteBookId,setNoteBookId] = useState(0)
     const history = useHistory()
+
+    console.log(currentNotebook)
+    const test = {};
+    if(currentNotebook !== undefined){
+        currentNotebook.forEach(ele => {
+            test[ele.id] = ele
+        });
+    }
 
     const handleCancelClick = (e) => {
         e.preventDefault();
@@ -19,14 +30,14 @@ function NotesForm({ hideForm }) {
         e.preventDefault();
         const payload = {
             title,
-            contents
+            contents,
+            noteBookId
         }
-        let newNote = dispatch(notesAction.writeNote({ title, contents }))
-        console.log(newNote.id)
+        console.log(payload)
+        let newNote = dispatch(notesAction.writeNote({ noteBookId, title, contents}))
         if(newNote){
             history.push(`/`)
         }
-        // return dispatch(notesAction.writeNote({ title, contents })
     }
 
     return (
@@ -47,6 +58,11 @@ function NotesForm({ hideForm }) {
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Your note here"
                 />
+                <select value={noteBookId} onChange={(e) => setNoteBookId(e.target.value)}>
+                    {currentNotebook?.map(book => (
+                        <option key={book.id} value={book.id}> {book.title} </option>
+                    ))}
+                </select>
             </label>
             <button id="submit" type="submit">Submit</button>
         </form>

@@ -27,6 +27,8 @@ const Detail = ({ notes }) => {
     const content = test[+noteId.Id]?.contents
     const Name = test[+noteId.Id]?.title
     const id = test[+noteId.Id]?.id
+    const book = test[+noteId.Id]?.noteBookId
+    console.log(book)
 
     useEffect(() => {
         if (noteId.id) {
@@ -53,6 +55,7 @@ const Detail = ({ notes }) => {
         <div className="content">
             <h2>{Name}</h2>
             <p>{content}</p>
+            <p>{book}</p>
             <div>
                 <button onClick={() => setEditRequest(true)}>Edit Note</button>
                 <button onClick={() => setDeleteRequest(true)}>Delete Note</button>

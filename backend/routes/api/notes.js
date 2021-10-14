@@ -24,16 +24,16 @@ router.post(
 	csrfProtection,
 	requireAuth,
 	asyncHandler(async (req, res, next) => {
-		const { title, contents } = req.body;
+		const { title, contents, noteBookId } = req.body;
 		const userId = req.user.id;
-		console.log(userId)
+		console.log("this is the body",req.body)
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {
 
 			const newNote = await db.Notes.create({
 				userId: userId,
-                // noteBooksId,
+                noteBookId,
                 title,
                 contents
 			});
