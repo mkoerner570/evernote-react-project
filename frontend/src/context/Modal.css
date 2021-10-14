@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: brown;
+    background-color: rgba(118, 118, 118, 0.421);
 }
 
 #modal-background {

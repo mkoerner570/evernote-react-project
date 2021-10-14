@@ -18,6 +18,7 @@ function SignupFormPage() {
     if(demoUser){
       setCredential("Demo-lition");
       setPassword("password")
+      setEmail('demo@user.io')
       return dispatch(sessionActions.login({ credential, password }))
     }
   },[demoUser])

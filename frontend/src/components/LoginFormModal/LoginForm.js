@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 
@@ -7,6 +7,15 @@ function LoginForm() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [demoUser, setDemoUser] = useState(false)
+
+  useEffect(() => {
+    if(demoUser){
+      setCredential("Demo-lition");
+      setPassword("password")
+      return dispatch(sessionActions.login({ credential, password }))
+    }
+  },[demoUser])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +54,7 @@ function LoginForm() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button type="submit" onClick={() => setDemoUser(true)}>Demo User</button>
     </form>
   );
 }
