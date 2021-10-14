@@ -21,7 +21,6 @@ function NotesBooksForm({ hideForm }) {
             title
         }
         let newNotebook = dispatch(notesAction.makeNotebook({ title }))
-        console.log(newNotebook)
         if(newNotebook){
             history.push(`/`)
         }

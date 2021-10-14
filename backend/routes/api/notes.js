@@ -26,7 +26,6 @@ router.post(
 	asyncHandler(async (req, res, next) => {
 		const { title, contents, noteBookId } = req.body;
 		const userId = req.user.id;
-		console.log("this is the body",req.body)
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {

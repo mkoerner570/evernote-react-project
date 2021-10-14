@@ -51,7 +51,7 @@ export const getOneNote = (id) => async dispatch => {
 
 export const writeNote = (note) => async(dispatch) => {
     const {userId, noteBookId, title, contents} = note;
-    console.log("this is what is sent",note)
+
     const response = await csrfFetch("/api/notes", {
         method:"POST",
         body: JSON.stringify({

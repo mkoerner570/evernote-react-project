@@ -7,8 +7,8 @@ import Navigation from "./components/Navigation";
 import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
 import NotesBooksForm from "./components/NotebooksForm/NotebooksForm";
-import Detail from "./components/Detail/Detail"
 import "./index.css"
+import Search from "./components/Search/Search";
 
 function App() {
   const dispatch = useDispatch();

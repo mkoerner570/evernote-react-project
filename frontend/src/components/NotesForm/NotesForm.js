@@ -13,7 +13,6 @@ function NotesForm({ hideForm }) {
     const [noteBookId,setNoteBookId] = useState(0)
     const history = useHistory()
 
-    console.log(currentNotebook)
     const test = {};
     if(currentNotebook !== undefined){
         currentNotebook.forEach(ele => {
@@ -28,12 +27,7 @@ function NotesForm({ hideForm }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = {
-            title,
-            contents,
-            noteBookId
-        }
-        console.log(payload)
+
         let newNote = dispatch(notesAction.writeNote({ noteBookId, title, contents}))
         if(newNote){
             history.push(`/`)

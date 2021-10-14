@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteNote, getOneNote } from "../../store/notes";
+// import { deleteNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
 import { editNotebook } from '../../store/notebooks';
 
@@ -8,7 +8,6 @@ const BookEdit = ({ notes }) => {
     const bookId = useParams()
     const dispatch = useDispatch();
     const currentNotebook = useSelector((state) => state.notebooks.currentNotebook);
-    const userId = useSelector((state) => state.session.user?.id);
 
     const history = useHistory()
 
@@ -30,9 +29,7 @@ const BookEdit = ({ notes }) => {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        const payload = {
-            editedTitle,
-        }
+
         let editedNote = dispatch(editNotebook(notess,editedTitle))
         if(editedNote){
             history.push(`/notebook/${bookId.Id}`)

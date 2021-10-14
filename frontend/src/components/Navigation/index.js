@@ -7,6 +7,7 @@ import NotesForm from '../NotesForm/NotesForm';
 import NotesBooksForm from '../NotebooksForm/NotebooksForm'
 import './Navigation.css';
 import NoteDetail from '../Notes/Note';
+import Search from '../Search/Search';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -34,6 +35,7 @@ function Navigation({ isLoaded }){
       <div className="user">
         {isLoaded && sessionLinks}
       </div>
+      <Search />
       <NavLink to="/NotesForm">Notes</NavLink>
       <NavLink to="/NotesBooksForm">Create a New NoteBook?</NavLink>
       {/* <NoteDetail /> */}

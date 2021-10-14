@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { deleteNote, getOneNote } from "../../store/notes";
 import { useHistory, useParams } from 'react-router';
-import { NavLink } from 'react-router-dom';
-import Edit from '../Edit/Edit';
-import { Route } from 'react-router';
+// import { NavLink } from 'react-router-dom';
+// import Edit from '../Edit/Edit';
+// import { Route } from 'react-router';
 // import { Dispatch } from 'react';
 
 
@@ -28,7 +28,6 @@ const Detail = ({ notes }) => {
     const Name = test[+noteId.Id]?.title
     const id = test[+noteId.Id]?.id
     const book = test[+noteId.Id]?.noteBookId
-    console.log(book)
 
     useEffect(() => {
         if (noteId.id) {
@@ -38,7 +37,6 @@ const Detail = ({ notes }) => {
 
     useEffect(() => {
         if(deleteRequest){
-            console.log(noteId.Id)
             dispatch(deleteNote(noteId.Id));
             history.push('/notes')
         }
@@ -46,7 +44,6 @@ const Detail = ({ notes }) => {
 
     useEffect(() => {
         if (editRequest) {
-            console.log("things")
             history.push(`/note/${id}/edit`)
         }
     }, [editRequest]);

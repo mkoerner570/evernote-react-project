@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { deleteNotebook, getOneNotebook } from "../../store/notebooks";
 import { useHistory, useParams } from 'react-router';
-import { NavLink } from 'react-router-dom';
-import Edit from '../Edit/Edit';
-import { Route } from 'react-router';
+// import { NavLink } from 'react-router-dom';
+// import Edit from '../Edit/Edit';
+// import { Route } from 'react-router';
 // import { Dispatch } from 'react';
 
 
@@ -31,7 +31,7 @@ const BookDetail = ({ books }) => {
         if (bookId.id) {
             dispatch(getOneNotebook(id));
         }
-    }, [id,dispatch]);
+    }, [bookId.id,id,dispatch]);
 
     useEffect(() => {
         if(deleteRequest){
@@ -42,7 +42,6 @@ const BookDetail = ({ books }) => {
 
     useEffect(() => {
         if (editRequest) {
-            console.log("things")
             history.push(`/notebook/${id}/edit`)
         }
     }, [editRequest]);

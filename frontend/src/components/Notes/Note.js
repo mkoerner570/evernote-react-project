@@ -25,9 +25,11 @@ const NoteDetail = () => {
         }
     }, [userId,dispatch]);
 
-    function handleChange(value){
+    function handleNote(value){
         history.push(`/note/${value}`)
-        // history.push(`/notebook/${value}`)
+    }
+    function handleBook(value){
+        history.push(`/notebook/${value}`)
     }
 
     return (
@@ -38,13 +40,13 @@ const NoteDetail = () => {
                         <Link to={`/note/${note.id}`}> ({note.title}) </Link>
                     ))}
                 </div> */}
-                <select className="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
+                <select className="selector" value={selected} onChange={(e) => handleNote(e.target.value)}>
                     <option>Select a note</option>
                     {currentNote?.map(note => (
                         <option key={note.id} value={note.id}> {note.title} </option>
                     ))}
                 </select>
-                <select className="selector" value={selected} onChange={(e) => handleChange(e.target.value)}>
+                <select className="selector" value={selected} onChange={(e) => handleBook(e.target.value)}>
                     <option>Select a Notebook</option>
                     {currentNotebook?.map(book => (
                         <option key={book.id} value={book.id}> {book.title} </option>
