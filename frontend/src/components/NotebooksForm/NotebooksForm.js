@@ -7,19 +7,19 @@ import { useHistory } from 'react-router-dom';
 function NotesBooksForm({ hideForm }) {
     const dispatch = useDispatch()
     const[title,setTitle] = useState("");
-    const[contents,setContent] = useState("")
+    // const[contents,setContent] = useState("")
     const history = useHistory()
 
-    const handleCancelClick = (e) => {
-        e.preventDefault();
-        hideForm();
-    };
+    // const handleCancelClick = (e) => {
+    //     e.preventDefault();
+    //     hideForm();
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = {
-            title
-        }
+        // const payload = {
+        //     title
+        // }
         let newNotebook = dispatch(notesAction.makeNotebook({ title }))
         if(newNotebook){
             history.push(`/`)

@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
-import NotesForm from '../NotesForm/NotesForm';
-import NotesBooksForm from '../NotebooksForm/NotebooksForm'
+// import NotesForm from '../NotesForm/NotesForm';
+// import NotesBooksForm from '../NotebooksForm/NotebooksForm'
 import './Navigation.css';
-import NoteDetail from '../Notes/Note';
+// import NoteDetail from '../Notes/Note';
 import Search from '../Search/Search';
 
 function Navigation({ isLoaded }){
@@ -35,9 +35,15 @@ function Navigation({ isLoaded }){
       <div className="user">
         {isLoaded && sessionLinks}
       </div>
-      <Search />
-      <NavLink to="/NotesForm">Notes</NavLink>
-      <NavLink to="/NotesBooksForm">Create a New NoteBook?</NavLink>
+      {/* <Search /> */}
+      <ul>
+        <li>
+          <NavLink to="/NotesForm">Notes</NavLink>
+        </li>
+        <li>
+          <NavLink to="/NotesBooksForm">Create a New NoteBook?</NavLink>
+        </li>
+      </ul>
       {/* <NoteDetail /> */}
     </nav>
   );

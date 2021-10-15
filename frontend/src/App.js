@@ -8,7 +8,8 @@ import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
 import NotesBooksForm from "./components/NotebooksForm/NotebooksForm";
 import "./index.css"
-import Search from "./components/Search/Search";
+// import { getNotes } from "./store/notebooks";
+// import Search from "./components/Search/Search";
 
 function App() {
   const dispatch = useDispatch();

@@ -10,11 +10,13 @@ const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
 router.get(
-	'/:id',
+	'/:id(\\d+)',
 	asyncHandler(async (req, res, next) => {
-		const note_Id = req.params.id;
+		const noteTitle = req.params.id;
+		console.log("&&&&&&&&",note_id)
 
-		const note = await db.Notes.findAll({where: {"noteBookId":note_Id}});
+		const note = await db.Notes.findAll({where: {"title":noteTitle}});
+		console.log("***********",note)
 	return res.json(note)
 	})
 );

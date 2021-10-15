@@ -4,6 +4,7 @@ const usersRouter = require('./users');
 const notesRouter = require('./notes');
 const notebookRouter = require("./notebooks")
 const findNoteRouter = require("./findNote")
+const searchRouter = require("./search")
 
 const asyncHandler = require("express-async-handler");
 const { setTokenCookie } = require("../../utils/auth");
@@ -16,6 +17,7 @@ router.use('/users', usersRouter);
 router.use('/notes',notesRouter);
 router.use('/notebooks',notebookRouter)
 router.use('/findNote',findNoteRouter)
+router.use('/search',searchRouter)
 
 // router.post('/test',(req,res) => {
 //     res.json({requestBody:req.body});

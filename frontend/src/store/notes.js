@@ -33,8 +33,8 @@ const update = (noteId) => ({
     noteId,
 });
 
-export const getNotes = () => async dispatch => {
-    const response = await fetch(`/api/notes`);
+export const getNotes = (id) => async dispatch => {
+    const response = await fetch(`backend/routes/api/findNote/${id}`);
     if (response.ok) {
         const item = await response.json();
         dispatch(addOneNote(item));

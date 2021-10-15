@@ -32,7 +32,7 @@ const BookEdit = ({ notes }) => {
 
         let editedNote = dispatch(editNotebook(notess,editedTitle))
         if(editedNote){
-            history.push(`/notebook/${bookId.Id}`)
+            history.push(`/notebook`)
         }
     }
 

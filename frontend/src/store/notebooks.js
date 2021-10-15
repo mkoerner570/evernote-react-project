@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = 'notesbooks/LOAD';
 const LOAD_NOTE = "notesbooks/loadnotebook"
 const ADD_ONE = 'notesbooks/ADD_ONE';
+const GET = 'notebooks/GET'
 const REMOVE_NOTE = "notesbooks/REMOVE_NOTE";
 const UPDATE_NOTE = "notesbooks/UPDATE_NOTE";
 
@@ -33,11 +34,16 @@ const update = (notebookId) => ({
     notebookId,
 });
 
-export const getNotes = () => async dispatch => {
-    const response = await fetch(`/api/notebooks`);
+const get = (notes) => ({
+    type: GET,
+    notes
+})
+
+export const getNotes = (id) => async dispatch => {
+    const response = await fetch(`/api/findNote/${id}`);
     if (response.ok) {
         const item = await response.json();
-        dispatch(addOneNotebook(item));
+        dispatch(get(item));
     }
 }
 
@@ -118,6 +124,12 @@ const noteBookReducer = (state = initialState, action) => {
             const newState = { ...state };
             delete newState[action.itemId];
             return newState;
+        }
+        case GET: {
+            const selectedNotes = {...state};
+            action.notes.forEach(note =>
+                selectedNotes[note.id] = note)
+            return selectedNotes;
         }
         default:
             return state;

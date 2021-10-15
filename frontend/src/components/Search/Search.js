@@ -16,9 +16,11 @@ const Search = () => {
 
     return(
         <div>
-            <form action='/' method='get'>
-
-            </form>
+            <input
+                type='text'
+                placeholder="Search"
+            ></input>
+            <button type="submit"> Submit </button>
         </div>
     )
 }

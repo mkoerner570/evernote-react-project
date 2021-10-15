@@ -71,7 +71,6 @@ select {
     width: 500px;
 
 }
-
 .noteForm{
     display: flex;
     flex-direction: column;
@@ -129,4 +128,12 @@ select {
 #modal-content {
     position: absolute;
     background-color:white;
+}
+
+.notesInBook {
+    background-color: yellowgreen;
+}
+
+a{
+    color: white;
 }
