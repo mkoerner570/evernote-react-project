@@ -37,10 +37,10 @@ function Navigation({ isLoaded }){
       </div>
       {/* <Search /> */}
       <ul>
-        <li>
+        <li className="create">
           <NavLink to="/NotesForm">Notes</NavLink>
         </li>
-        <li>
+        <li className="create">
           <NavLink to="/NotesBooksForm">Create a New NoteBook?</NavLink>
         </li>
       </ul>

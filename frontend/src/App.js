@@ -8,6 +8,7 @@ import NotesForm from "./components/NotesForm/NotesForm";
 import NoteDetail from "./components/Notes/Note";
 import NotesBooksForm from "./components/NotebooksForm/NotebooksForm";
 import "./index.css"
+import Links from "./components/Links/Links";
 // import { getNotes } from "./store/notebooks";
 // import Search from "./components/Search/Search";
 
@@ -35,7 +36,7 @@ function App() {
       <Route path="/NotesBooksForm">
         <NotesBooksForm />
       </Route>
-
+      <Links />
     </>
   );
 }

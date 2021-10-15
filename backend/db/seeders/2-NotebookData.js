@@ -7,7 +7,7 @@ module.exports = {
       return queryInterface.bulkInsert('Notebooks', [
         {
         userId: 1,
-        title: "First book!"
+        title: "First Notebook!"
         }
       ], {});
   },

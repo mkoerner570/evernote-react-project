@@ -53,6 +53,7 @@ function NotesForm({ hideForm }) {
                     placeholder="Your note here"
                 />
                 <select value={noteBookId} onChange={(e) => setNoteBookId(e.target.value)}>
+                    <option key={null} value={null}>Please select a Notebook</option>
                     {currentNotebook?.map(book => (
                         <option key={book.id} value={book.id}> {book.title} </option>
                     ))}

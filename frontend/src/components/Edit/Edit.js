@@ -41,14 +41,9 @@ const Edit = ({ notes }) => {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        // const payload = {
-        //     notess,
-        //     editedTitle,
-        //     editContents
-        // }
         let editedNote = dispatch(editNote(notess, editedTitle,editContents))
         if(editedNote){
-            history.push(`/note/${noteId.Id}`)
+            history.push(`/`)
         }
     }
 

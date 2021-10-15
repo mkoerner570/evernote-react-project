@@ -62,7 +62,7 @@ export const writeNote = (note) => async(dispatch) => {
         }),
     });
     const data = await response.json();
-    dispatch(loadnote(data.note));
+    dispatch(addOneNote(data.note));
     return response;
 }
 
@@ -86,6 +86,7 @@ export const deleteNote = (noteId) => async dispatch => {
         headers: {'Content-Type': 'application/json',},
         // body: JSON.stringify(noteId),
     })
+    dispatch(remove(noteId))
     return response;
 }
 

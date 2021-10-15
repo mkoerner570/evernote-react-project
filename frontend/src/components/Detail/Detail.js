@@ -13,6 +13,7 @@ const Detail = ({ notes }) => {
     const noteId = useParams()
     const dispatch = useDispatch();
     const currentNote = useSelector((state) => state.notes.currentNote);
+    const currentNotebook = useSelector((state) => state.notebooks.currentNotebook);
     const [deleteRequest,setDeleteRequest] = useState(false)
     const [editRequest, setEditRequest] = useState(false)
     const history = useHistory()
@@ -24,10 +25,19 @@ const Detail = ({ notes }) => {
         });
     }
 
+    const test2 = {}
+    if(currentNotebook !== undefined){
+        currentNotebook.forEach(ele => {
+            test2[ele.id] = ele
+        });
+    }
+
     const content = test[+noteId.Id]?.contents
     const Name = test[+noteId.Id]?.title
     const id = test[+noteId.Id]?.id
     const book = test[+noteId.Id]?.noteBookId
+    const book2 = Object.values(test2);
+    const theBook = book2.find(note => note.id === book)
 
     useEffect(() => {
         if (noteId.id) {
@@ -38,7 +48,7 @@ const Detail = ({ notes }) => {
     useEffect(() => {
         if(deleteRequest){
             dispatch(deleteNote(noteId.Id));
-            history.push('/notes')
+            history.push('/')
         }
     }, [deleteRequest]);
 
@@ -50,12 +60,13 @@ const Detail = ({ notes }) => {
 
     return (
         <div className="content">
-            <h2>{Name}</h2>
-            <p>{content}</p>
-            <p>{book}</p>
-            <div>
-                <button onClick={() => setEditRequest(true)}>Edit Note</button>
-                <button onClick={() => setDeleteRequest(true)}>Delete Note</button>
+            <h2 id="noteName">{Name}</h2>
+            <p id="theText">{content}</p>
+            <h2 id="placement">In NoteBook:</h2>
+            <h3 id="bookName">{theBook.title}</h3>
+            <div className="change">
+                <button id="setEdit" onClick={() => setEditRequest(true)}>Edit Note</button>
+                <button id="setDelete" onClick={() => setDeleteRequest(true)}>Delete Note</button>
             </div>
         </div>
 

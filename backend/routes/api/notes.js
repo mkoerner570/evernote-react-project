@@ -26,6 +26,7 @@ router.post(
 	asyncHandler(async (req, res, next) => {
 		const { title, contents, noteBookId } = req.body;
 		const userId = req.user.id;
+		console.log("thigns",userId)
 
 		const validatorErrors = validationResult(req);
 		if (validatorErrors.isEmpty()) {
@@ -36,6 +37,7 @@ router.post(
                 title,
                 contents
 			});
+
 			return res.json({
 				newNote,
 			});

@@ -49,7 +49,7 @@ const BookDetail = ({ books }) => {
     useEffect(() => {
         if(deleteRequest){
             dispatch(deleteNotebook(bookId.Id));
-            history.push('/notes')
+            history.push('/')
         }
     }, [deleteRequest]);
 
@@ -61,15 +61,15 @@ const BookDetail = ({ books }) => {
 
     return (
         <div className="notesInBook">
-            <h2>{Name}</h2>
+            <h2 id="noteName">{Name}</h2>
             {notesInCurrent.map(note => (
                 <ul>
                     <NavLink key={note.id} to={`/note/${note.id}`}>{note.title}</NavLink>
                 </ul>
             ))}
             <div>
-                <button onClick={() => setEditRequest(true)}>Edit Note</button>
-                <button onClick={() => setDeleteRequest(true)}>Delete Note</button>
+                <button id="setEdit" onClick={() => setEditRequest(true)}>Edit Notebook</button>
+                <button id="setDelete" onClick={() => setDeleteRequest(true)}>Delete Notebook</button>
             </div>
         </div>
 

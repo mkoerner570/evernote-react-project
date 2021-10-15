@@ -8,8 +8,8 @@ module.exports = {
         {
         userId:1,
         noteBookId:1,
-        title: "Example Note",
-        contents: "Testing, testing, testing, testing"
+        title: "Your First Note!",
+        contents: "Here is where you can Write all the notes you Want!"
         }
     ], {});
   },
