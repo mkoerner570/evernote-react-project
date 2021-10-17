@@ -5,3 +5,7 @@ In one terminal, navigate into the front end file and start running the front en
 end file.
 
 From there, start taking notes and organizing them into your notebooks!
+
+For more information on the structure of the clone, heead to the wiki [here](https://github.com/mkoerner570/evernote-react-project/wiki).
+
+This clone was made with a combination of [Javascript](https://developer.mozilla.org/en-US/docs/Web/javascript), [Express](https://expressjs.com), [React](https://reactjs.org/), and [Redux](https://redux.js.org/). It was styled with [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
